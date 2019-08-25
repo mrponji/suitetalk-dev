@@ -11,23 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-/*
-Route::get('/orders', function() {
-    return view('pages.orders');
-});
-*/
-
-Route::get('/orders', 'OrdersController@index');
-
-Route::get('/orders/{id}', function($id) {
-    //return view('pages.orders');
-});
 Auth::routes();
 
+Route::get('/', function () { return view('welcome'); });
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('queries', 'QueriesController');
+Route::resource('netsuite/quotes', 'NetSuite\Quotes\QuotesController');

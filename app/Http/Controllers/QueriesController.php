@@ -36,7 +36,7 @@ class QueriesController extends Controller
      */
     public function create()
     {
-        return view('pages.queries.create');
+        return view('pages.queries.upsert')->with('query', new Query);
     }
 
     /**
@@ -47,7 +47,17 @@ class QueriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $this->validate($request, [
+            "name" => "required"
+        ,   "message" => "required"
+        ]);
+
+        $query = new Query;
+        $query->name = $request->input('name');
+        $query->message = $request->input('message');
+        $id = $query->save();
+
+        return redirect(action('QueriesController@index'));
     }
 
     /**
@@ -72,7 +82,8 @@ class QueriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $query = Query::find($id);
+        return view('pages.queries.upsert')->with('query', $query);
     }
 
     /**
