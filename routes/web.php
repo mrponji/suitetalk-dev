@@ -16,4 +16,6 @@ Auth::routes();
 Route::get('/', function () { return view('welcome'); });
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/login', 'NetSuite\LoginController@show');
+Route::get('/post', 'NetSuite\LoginController@login');
 Route::resource('netsuite/quotes', 'NetSuite\Quotes\QuotesController');
